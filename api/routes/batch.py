@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException
 from typing import List
 from datetime import datetime
-from ..routes.classification import Document
+from api.routes.classification import Document
 
 router = APIRouter(prefix="/api/v1/classify", tags=["batch"])
 

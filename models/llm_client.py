@@ -1,5 +1,5 @@
 from typing import Dict, Optional
-from .openrouter_client import OpenRouterClient
+from models.openrouter_client import OpenRouterClient
 
 class LLMClient:
     def __init__(self):

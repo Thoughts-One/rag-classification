@@ -1,8 +1,8 @@
 from typing import Dict, Optional
-from ..models.llm_client import LLMClient
-from ..storage.classification_cache import ClassificationCache
-from ..storage.relationship_store import RelationshipStore
-from ..utils.text_processing import preprocess_text
+from models.llm_client import LLMClient
+from storage.classification_cache import ClassificationCache
+from storage.relationship_store import RelationshipStore
+from utils.text_processing import preprocess_text
 from pathlib import Path
 import yaml
 
@@ -52,7 +52,7 @@ class DocumentClassifier:
 
     def _extract_relationships(self, document: Dict) -> Dict:
         """Extract relationships from document content using RelationshipExtractor"""
-        from .relationship_extractor import RelationshipExtractor
+        from core.relationship_extractor import RelationshipExtractor
         extractor = RelationshipExtractor()
         content = document.get("content", "")
         return extractor.extract_relationships(content)

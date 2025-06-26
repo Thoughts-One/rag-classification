@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException
 from typing import Optional
 from datetime import datetime
-from ...storage.relationship_store import RelationshipStore
+from storage.relationship_store import RelationshipStore
 
 router = APIRouter(prefix="/api/v1/relationships", tags=["relationships"])
 relationship_store = RelationshipStore()
