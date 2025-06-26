@@ -3,7 +3,10 @@ from ..models.llm_client import LLMClient
 from ..storage.classification_cache import ClassificationCache
 from ..storage.relationship_store import RelationshipStore
 from ..utils.text_processing import preprocess_text
-from ..config.taxonomy import TAXONOMY
+from pathlib import Path
+import yaml
+
+TAXONOMY = yaml.safe_load((Path(__file__).parent.parent / "config" / "taxonomy.yaml").read_text())
 
 class DocumentClassifier:
     def __init__(self):
