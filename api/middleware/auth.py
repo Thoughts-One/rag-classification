@@ -12,7 +12,7 @@ async def api_key_auth(request: Request, call_next: Callable[[Request], Awaitabl
             detail="API key not configured"
         )
         
-    if request.url.path in ["/api/v1/health", "/api/v1/health/detailed"]:
+    if request.url.path in ["/", "/api/v1/health", "/api/v1/health/detailed"]:
         return await call_next(request)
         
     auth_header = request.headers.get("X-API-Key")
