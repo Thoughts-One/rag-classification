@@ -9,6 +9,8 @@ services:
     startCommand: gunicorn app:application --bind 0.0.0.0:$PORT
     healthCheckPath: /api/v1/health
     envVars:
+      - key: API_KEY
+        sync: false
       - key: OPENROUTER_API_KEY
         sync: false
       - key: REDIS_URL

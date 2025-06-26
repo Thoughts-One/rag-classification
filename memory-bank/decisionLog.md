@@ -26,3 +26,7 @@ This file logs important decisions made during the project, including the ration
 - Custom start commands are often ignored in favor of platform defaults
 - WSGI entry point must be named 'application' in root-level module
 - Modern dependency versions work better than trying to force older ones
+[2025-06-26 09:58:15] - Updated API health check routing and security:
+- Added /api/v1 prefix to health router in main.py
+- Secured API_KEY in render.yaml with sync:false
+- Verified auth middleware health check paths match /api/v1/health

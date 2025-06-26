@@ -11,7 +11,7 @@ app = FastAPI(
 # Include routers
 app.include_router(classification.router)
 app.include_router(relationships.router)
-app.include_router(health.router)
+app.include_router(health.router, prefix="/api/v1")
 app.include_router(batch.router)
 
 # Add middleware
