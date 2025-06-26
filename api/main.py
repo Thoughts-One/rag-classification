@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
-from api.routes import classification, relationships, health, batch
-from api.middleware import auth, rate_limiting, logging
+from rag_classification.api.routes import classification, relationships, health, batch
+from rag_classification.api.middleware import auth, rate_limiting, logging
 
 app = FastAPI(
     title="RAG Classification Service",
