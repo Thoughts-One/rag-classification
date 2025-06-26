@@ -13,15 +13,8 @@ async def health_check():
 
 @router.get("/health/detailed")
 async def detailed_health_check():
-    """Comprehensive health check with system status"""
+    """Lightweight health check endpoint (same as basic)"""
     return {
         "status": "healthy",
-        "checks": {
-            "database": True,
-            "redis": True,
-            "llm_primary": True,
-            "llm_fallback": True,
-            "storage": True
-        },
         "timestamp": datetime.utcnow().isoformat()
     }

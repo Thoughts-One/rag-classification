@@ -30,3 +30,4 @@ This file logs important decisions made during the project, including the ration
 - Added /api/v1 prefix to health router in main.py
 - Secured API_KEY in render.yaml with sync:false
 - Verified auth middleware health check paths match /api/v1/health
+[2025-06-26 10:42:20] - Simplified health check endpoints to be extremely lightweight by removing all system checks from /health/detailed endpoint to minimize Render.com health check overhead
