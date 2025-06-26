@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.responses import JSONResponse
 from .routes import classification, relationships, health, batch
 from .middleware import auth, rate_limiting, logging
 
@@ -7,6 +8,13 @@ app = FastAPI(
     description="Document classification and relationship extraction for RAG ecosystem",
     version="0.1.0"
 )
+
+@app.get("/")
+async def root():
+    return JSONResponse(
+        content={"status": "running", "service": "RAG Classification API"},
+        status_code=200
+    )
 
 # Include routers
 app.include_router(classification.router)
