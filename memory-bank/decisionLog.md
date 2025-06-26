@@ -31,3 +31,4 @@ This file logs important decisions made during the project, including the ration
 - Secured API_KEY in render.yaml with sync:false
 - Verified auth middleware health check paths match /api/v1/health
 [2025-06-26 10:42:20] - Simplified health check endpoints to be extremely lightweight by removing all system checks from /health/detailed endpoint to minimize Render.com health check overhead
+[2025-06-26 10:46:53] - Modified request logging middleware to filter out Render.com health checks (User-Agent: "Render/1.0") to reduce log noise. Health checks occur every 5 seconds and were cluttering logs.
