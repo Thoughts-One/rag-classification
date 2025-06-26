@@ -32,3 +32,62 @@ This file logs important decisions made during the project, including the ration
 - Verified auth middleware health check paths match /api/v1/health
 [2025-06-26 10:42:20] - Simplified health check endpoints to be extremely lightweight by removing all system checks from /health/detailed endpoint to minimize Render.com health check overhead
 [2025-06-26 10:46:53] - Modified request logging middleware to filter out Render.com health checks (User-Agent: "Render/1.0") to reduce log noise. Health checks occur every 5 seconds and were cluttering logs.
+
+## Coding Doctrine: **Incremental Development with Continuous Validation**
+
+### Primary Principles:
+
+**1. Minimum Viable Implementation (MVI)**
+- Implement the smallest possible code change that delivers a complete, testable feature increment
+- Each change should be independently verifiable and deployable
+
+**2. Red-Green-Refactor Cycles (TDD-inspired)**
+- Write failing test → Write minimal code to pass → Refactor → Repeat
+- Even without strict TDD, maintain this rhythm of test-implement-verify
+
+**3. Vertical Slicing**
+- Cut features into thin vertical slices that touch all necessary layers (UI → business logic → data)
+- Each slice delivers end-to-end functionality, however minimal
+
+### Supporting Practices:
+
+**Atomic Commits & Feature Branches**
+- Each commit represents a complete, working unit
+- Commits should compile, pass tests, and not break existing functionality
+
+**Walking Skeleton Approach**
+- Start with the thinnest possible end-to-end implementation
+- Gradually flesh out functionality while maintaining working state
+
+**Fail-Fast Feedback Loops**
+- Integrate and test frequently (ideally after each small change)
+- Catch issues early when context is fresh and fixes are simple
+
+**YAGNI Principle (You Aren't Gonna Need It)**
+- Implement only what's immediately needed for the current increment
+- Avoid anticipatory complexity
+
+### Practical Implementation:
+
+- **Feature decomposition**: Break large features into independently deliverable micro-features
+- **Time-boxing**: Set short development cycles (30min-2hrs) before testing
+- **Integration checkpoints**: Verify the system works after each increment
+- **Evolutionary design**: Let architecture emerge through small, validated changes
+
+This doctrine is often called **"Baby Steps Development"** or **"Micro-Increment Development"** in agile contexts.
+[2025-06-26 11:56:45] - Implemented OpenRouter API client with DeepSeek V3 as primary model and fallback support. Moved OpenRouter-specific logic to dedicated openrouter_client.py and updated llm_client.py to use it.
+[2025-06-26 11:59:45] - Migrated document preprocessing functions from rag-server to rag-classification/utils/text_processing.py. Includes validate_document(), process_json_file(), and process_markdown_file() functions while maintaining existing text processing capabilities.
+[2025-06-26 12:06:33] - Implemented SQLite caching system for classification results and relationship metadata
+- Replaced Redis with SQLite in classification_cache.py
+- Maintained same interface (get, set, clear) for backward compatibility
+- Added proper connection management and environment variable configuration
+- Integrated caching into API routes (classification.py, relationships.py)
+- Database path configurable via DATABASE_URL environment variable
+- Cache TTL configurable via CACHE_TTL_HOURS environment variable
+[2025-06-26 12:12:30] - Implemented core error handling system
+- Created error_handling.py with ClassificationError, LLMServiceError, ValidationError, ConfidenceError exceptions
+- Implemented ErrorSeverity Enum for error classification
+- Built ErrorHandler class with handle_error method and specific fallback strategies
+- Integrated with LLMClient while avoiding circular dependencies
+- Added rule-based fallback mechanism for service degradation
+[2025-06-26 12:34:11] - Implemented RelationshipExtractor class with regex patterns for requires, integrates_with, extends, related_to, and prerequisites relationships. Integrated into DocumentClassifier workflow.

@@ -151,72 +151,78 @@ Classification Emphasis:
 ### 3.1 Service Structure and Components
 
 ```yaml
-rag-classification/
-├── api/                           # REST API endpoints
-│   ├── __init__.py
-│   ├── main.py                   # FastAPI application
-│   ├── routes/
-│   │   ├── __init__.py
-│   │   ├── classification.py     # Classification endpoints
-│   │   ├── relationships.py      # Relationship queries
-│   │   ├── health.py            # Health checks
-│   │   └── batch.py             # Batch processing
-│   └── middleware/
-│       ├── __init__.py
-│       ├── auth.py              # API authentication
-│       ├── rate_limiting.py     # Rate limiting
-│       └── logging.py           # Request logging
-├── core/                         # Classification and relationship logic
-│   ├── __init__.py
-│   ├── classifier.py            # Main classification orchestrator
-│   ├── relationship_extractor.py # Code dependency analysis
-│   ├── role_classifier.py       # Role-specific classification
-│   ├── code_analyzer.py         # Language-specific processing
-│   ├── taxonomy_manager.py      # Classification schema management
-│   └── confidence_scorer.py     # Classification quality assessment
-├── models/                       # LLM orchestration and caching
-│   ├── __init__.py
-│   ├── llm_client.py            # Multi-provider LLM client
-│   ├── deepseek_client.py       # DeepSeek V3 API client
-│   ├── openrouter_client.py     # OpenRouter fallback client
-│   ├── cache_manager.py         # Response caching
-│   └── fallback_manager.py      # Model fallback logic
-├── storage/                      # Relationship metadata and cache
-│   ├── __init__.py
-│   ├── relationship_store.py    # Relationship metadata storage
-│   ├── classification_cache.py  # Classification result caching
-│   └── metrics_store.py         # Performance metrics
-├── config/                       # Classification schemas and rules
-│   ├── __init__.py
-│   ├── taxonomy.yaml            # Classification taxonomy
-│   ├── relationship_patterns.yaml # Relationship extraction rules
-│   ├── role_mappings.yaml       # Role-specific configurations
-│   └── llm_config.yaml          # LLM provider configurations
-├── utils/                        # Utility functions
-│   ├── __init__.py
-│   ├── text_processing.py       # Text preprocessing
-│   ├── validation.py            # Input validation
-│   └── monitoring.py            # Performance monitoring
-├── tests/                        # Test suite
-│   ├── __init__.py
-│   ├── test_classification.py   # Classification tests
-│   ├── test_relationships.py    # Relationship extraction tests
-│   ├── test_api.py              # API endpoint tests
-│   └── fixtures/                # Test data
-├── memory-bank/                  # Project documentation
-│   ├── productContext.md
-│   ├── activeContext.md
-│   ├── systemPatterns.md
-│   ├── decisionLog.md
-│   ├── progress.md
-│   └── projectBrief.md          # This document
-├── requirements.txt              # Python dependencies
-├── Dockerfile                    # Container configuration
-├── docker-compose.yml           # Local development setup
-├── render.yaml                   # Render.com deployment config
-└── README.md                     # Project documentation
+```yaml
+rag-classification/ # Implemented
+├── .gitignore                    # Implemented
+├── app.py                        # Implemented (Existing application entry point)
+├── Dockerfile                    # Implemented
+├── gunicorn_conf.py              # Implemented (Existing Gunicorn configuration)
+├── README.md                     # Implemented
+├── render.yaml                   # Implemented
+├── requirements.txt              # Implemented
+├── api/                           # REST API endpoints - Implemented
+│   ├── __init__.py               # Implemented
+│   ├── main.py                   # FastAPI application - Implemented
+│   ├── routes/                   # Implemented
+│   │   ├── __init__.py           # Implemented
+│   │   ├── classification.py     # Classification endpoints - Implemented
+│   │   ├── relationships.py      # Relationship queries - Implemented
+│   │   ├── health.py            # Health checks - Implemented
+│   │   └── batch.py             # Batch processing - Implemented
+│   └── middleware/               # Implemented
+│       ├── __init__.py           # Implemented
+│       ├── auth.py              # API authentication - Implemented
+│       ├── rate_limiting.py     # Rate limiting - Implemented
+│       └── logging.py           # Request logging - Implemented
+├── core/                         # Classification and relationship logic - Implemented
+│   ├── __init__.py               # Implemented
+│   ├── classifier.py            # Main classification orchestrator - Implemented
+│   ├── relationship_extractor.py # Code dependency analysis - Pending
+│   ├── role_classifier.py       # Role-specific classification - Pending
+│   ├── code_analyzer.py         # Language-specific processing - Pending
+│   ├── taxonomy_manager.py      # Classification schema management - Pending
+│   └── confidence_scorer.py     # Classification quality assessment - Pending
+├── models/                       # LLM orchestration and caching - Implemented
+│   ├── __init__.py               # Implemented
+│   ├── llm_client.py            # Multi-provider LLM client - Implemented
+│   ├── deepseek_client.py       # DeepSeek V3 API client - Pending
+│   ├── openrouter_client.py     # OpenRouter fallback client - Pending
+│   ├── cache_manager.py         # Response caching - Pending
+│   └── fallback_manager.py      # Model fallback logic - Pending
+├── storage/                      # Relationship metadata and cache - Implemented
+│   ├── __init__.py               # Implemented
+│   ├── relationship_store.py    # Relationship metadata storage - Implemented
+│   ├── classification_cache.py  # Classification result caching - Implemented
+│   └── metrics_store.py         # Performance metrics - Pending
+├── config/                       # Classification schemas and rules - Implemented
+│   ├── __init__.py               # Implemented
+│   ├── taxonomy.yaml            # Classification taxonomy - Implemented
+│   ├── relationship_patterns.yaml # Relationship extraction rules - Implemented
+│   ├── role_mappings.yaml       # Role-specific configurations - Pending
+│   └── llm_config.yaml          # LLM provider configurations - Pending
+├── utils/                        # Utility functions - Implemented
+│   ├── __init__.py               # Implemented
+│   ├── text_processing.py       # Text preprocessing - Implemented
+│   ├── validation.py            # Input validation - Pending
+│   └── monitoring.py            # Performance monitoring - Pending
+├── tests/                        # Test suite - Pending
+│   ├── __init__.py               # Pending
+│   ├── test_classification.py   # Classification tests - Pending
+│   ├── test_relationships.py    # Relationship extraction tests - Pending
+│   ├── test_api.py              # API endpoint tests - Pending
+│   └── fixtures/                # Test data - Pending
+├── memory-bank/                  # Project documentation - Implemented
+│   ├── productContext.md         # Implemented
+│   ├── activeContext.md          # Implemented
+│   ├── systemPatterns.md         # Implemented
+│   ├── decisionLog.md            # Implemented
+│   ├── progress.md               # Implemented
+│   └── projectBrief.md          # This document - Implemented
+├── your_application/             # Existing application directory - Implemented
+│   ├── __init__.py               # Implemented
+│   └── wsgi.py                  # Implemented
+└── docker-compose.yml           # Local development setup - Pending
 ```
-
 ### 3.2 API Endpoints and Integration Points
 
 **Core Classification Endpoints:**
@@ -667,28 +673,28 @@ Example Output:
 **Deliverables:**
 ```yaml
 Core Infrastructure:
-  - FastAPI application with health endpoints
-  - Basic classification API (/classify/document)
-  - DeepSeek V3 API integration
-  - SQLite-based storage for development
+  - FastAPI application with health endpoints - Implemented (api/main.py, api/routes/health.py)
+  - Basic classification API (/classify/document) - Implemented (api/routes/classification.py)
+  - DeepSeek V3 API integration - Implemented (via OpenRouter client)
+  - SQLite-based storage for development - Implemented (storage/relationship_store.py, storage/classification_cache.py integration complete)
 
 Migrated Functionality:
-  - Document preprocessing from rag-server
-  - LLM client abstraction
-  - Basic caching mechanism
-  - Error handling and logging
+  - Document preprocessing from rag-server - Implemented (utils/text_processing.py migration complete)
+  - LLM client abstraction - Implemented (models/llm_client.py)
+  - Basic caching mechanism - Implemented (storage/classification_cache.py)
+  - Error handling and logging - Implemented (api/middleware/logging.py and core/error_handling.py complete)
 
 Basic Relationship Extraction:
-  - Regex-based pattern detection
-  - Simple dependency mapping
-  - WordPress hook identification
-  - Integration point discovery
+  - Regex-based pattern detection - Implemented
+  - Simple dependency mapping - Implemented
+  - WordPress hook identification - Implemented
+  - Integration point discovery - Implemented
 
 Deployment:
-  - Render.com service configuration
-  - Environment variable management
-  - Basic monitoring and health checks
-  - CI/CD pipeline setup
+  - Render.com service configuration - Implemented (render.yaml)
+  - Environment variable management - Implemented (config/settings.py)
+  - Basic monitoring and health checks - Implemented (api/routes/health.py)
+  - CI/CD pipeline setup - Implemented (GitHub Actions workflow)
 ```
 
 ### 7.2 Phase 2: Enhancement (Weeks 3-4)
@@ -1829,3 +1835,48 @@ This comprehensive project brief provides the technical foundation, implementati
 - Coordination with rag-scraper and rag-server teams
 - Sample document corpus for testing and validation
 - Quality metrics and ground truth data for accuracy measurement
+
+## 13. Coding Doctrine
+
+## Core Doctrine: **Incremental Development with Continuous Validation**
+
+### Primary Principles:
+
+**1. Minimum Viable Implementation (MVI)**
+- Implement the smallest possible code change that delivers a complete, testable feature increment
+- Each change should be independently verifiable and deployable
+
+**2. Red-Green-Refactor Cycles (TDD-inspired)**
+- Write failing test → Write minimal code to pass → Refactor → Repeat
+- Even without strict TDD, maintain this rhythm of test-implement-verify
+
+**3. Vertical Slicing**
+- Cut features into thin vertical slices that touch all necessary layers (UI → business logic → data)
+- Each slice delivers end-to-end functionality, however minimal
+
+### Supporting Practices:
+
+**Atomic Commits & Feature Branches**
+- Each commit represents a complete, working unit
+- Commits should compile, pass tests, and not break existing functionality
+
+**Walking Skeleton Approach**
+- Start with the thinnest possible end-to-end implementation
+- Gradually flesh out functionality while maintaining working state
+
+**Fail-Fast Feedback Loops**
+- Integrate and test frequently (ideally after each small change)
+- Catch issues early when context is fresh and fixes are simple
+
+**YAGNI Principle (You Aren't Gonna Need It)**
+- Implement only what's immediately needed for the current increment
+- Avoid anticipatory complexity
+
+### Practical Implementation:
+
+- **Feature decomposition**: Break large features into independently deliverable micro-features
+- **Time-boxing**: Set short development cycles (30min-2hrs) before testing
+- **Integration checkpoints**: Verify the system works after each increment
+- **Evolutionary design**: Let architecture emerge through small, validated changes
+
+This doctrine is often called **"Baby Steps Development"** or **"Micro-Increment Development"** in agile contexts.

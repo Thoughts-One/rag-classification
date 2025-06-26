@@ -48,10 +48,8 @@ class DocumentClassifier:
         return f"{document.get('source', '')}_{content_hash}"
 
     def _extract_relationships(self, document: Dict) -> Dict:
-        """Extract relationships from document content"""
-        # Placeholder - will be implemented in relationship_extractor.py
-        return {
-            "requires": [],
-            "integrates_with": [],
-            "related_to": []
-        }
+        """Extract relationships from document content using RelationshipExtractor"""
+        from .relationship_extractor import RelationshipExtractor
+        extractor = RelationshipExtractor()
+        content = document.get("content", "")
+        return extractor.extract_relationships(content)
