@@ -2,7 +2,7 @@ from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from typing import Optional
 from datetime import datetime
-from ...core.classifier import DocumentClassifier
+from core.classifier import DocumentClassifier
 
 router = APIRouter(prefix="/api/v1/classify", tags=["classification"])
 classifier = DocumentClassifier()
