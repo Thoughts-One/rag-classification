@@ -4,7 +4,7 @@ services:
     env: python
     plan: starter
     python:
-      version: "3.9.16"
+      version: "3.13.4"
     buildCommand: |
       pip install -r requirements.txt
       pip install gunicorn==21.2.0 uvicorn==0.27.0
