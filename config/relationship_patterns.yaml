@@ -1,0 +1,32 @@
+# Relationship Extraction Patterns
+code_patterns:
+  import_statements:
+    - pattern: "use ([A-Z][\w\\\\]+)"
+      relationship: requires
+    - pattern: "import ([A-Z][\w]+)"
+      relationship: requires
+      
+  function_calls:
+    - pattern: "add_action\('([\w_]+)'"
+      relationship: integrates_with
+    - pattern: "add_filter\('([\w_]+)'"
+      relationship: integrates_with
+    - pattern: "apply_filters\('([\w_]+)'"
+      relationship: extends
+      
+  class_extensions:
+    - pattern: "extends ([A-Z][\w]+)"
+      relationship: extends
+
+documentation_markers:
+  explicit_requirements:
+    - pattern: "@requires (.+)"
+      relationship: requires
+    - pattern: "Prerequisite: (.+)"
+      relationship: requires
+      
+  cross_references:
+    - pattern: "@see (.+)"
+      relationship: related_to
+    - pattern: "See also: (.+)"
+      relationship: related_to

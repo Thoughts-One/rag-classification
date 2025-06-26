@@ -1,0 +1,56 @@
+# RAG Classification Taxonomy
+collections:
+  wordpress_block_development:
+    description: Gutenberg blocks, patterns, block.json configurations
+    topics:
+      - Property Display
+      - Search Forms
+      - Map Integration
+      - Dynamic Blocks
+    tags:
+      - production-ready
+      - requires-modification
+      - example-code
+      - dynamic-block
+      - static-block
+
+  wordpress_theme_development:
+    description: FSE themes, theme.json, templates, patterns
+    topics:
+      - Template Hierarchy
+      - Theme Architecture
+      - Style Variations
+      - Custom Templates
+    tags:
+      - fse-theme
+      - classic-theme
+      - theme-json
+      - template-part
+
+  wordpress_plugin_development:
+    description: Plugin architecture, hooks, APIs, integrations
+    topics:
+      - Plugin Structure
+      - Hook System
+      - Admin UI
+      - REST API
+    tags:
+      - production-ready
+      - requires-mw-properties
+      - requires-acf
+      - standalone
+
+relationship_patterns:
+  requires:
+    - pattern: "requires (.+?)"
+    - pattern: "depends on (.+?)"
+    - pattern: "needs (.+?)"
+  
+  integrates_with:
+    - pattern: "works with (.+?)"
+    - pattern: "connects to (.+?)"
+    - pattern: "uses (.+?) API"
+
+  extends:
+    - pattern: "extends (.+?)"
+    - pattern: "builds upon (.+?)"
