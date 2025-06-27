@@ -1880,3 +1880,13 @@ This comprehensive project brief provides the technical foundation, implementati
 - **Evolutionary design**: Let architecture emerge through small, validated changes
 
 This doctrine is often called **"Baby Steps Development"** or **"Micro-Increment Development"** in agile contexts.
+### Deployment and Dependency Management:
+- **Render.com Build Process**: All dependencies are automatically installed from requirements.txt during deployment
+- **Local Development**: Uses same requirements.txt but doesn't require local pip install
+- **Isolated Environment**: Production runs in containerized environment with all dependencies pre-installed
+- **Consistency**: Ensures identical dependency versions across all environments
+### Production Deployment Details:
+- **Service URL**: https://rag-classification.onrender.com
+- **Health Check**: https://rag-classification.onrender.com/api/v1/health
+- **Environment**: Fully containerized on Render.com
+- **Access**: Public API with API_KEY authentication

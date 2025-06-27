@@ -18,3 +18,13 @@ The `rag-classification` service is a dedicated microservice designed to provide
 - **LLM Integration Strategy:** Utilizes DeepSeek V3 API as primary model for cost-efficiency, with OpenRouter for fallback models (GPT-4.5, Claude).
 - **Caching and Performance Optimization:** Implements multi-level caching (Redis, PostgreSQL) and async processing for high performance.
 - **Robust Error Handling:** Includes graceful degradation and error recovery mechanisms for LLM service unavailability or low confidence.
+**Deployment Approach:**
+- Hosted on Render.com with automatic dependency installation
+- Build process installs all requirements from requirements.txt
+- No local dependency installation needed
+- Environment fully managed by Render.com infrastructure
+**Production Deployment:**
+- URL: https://rag-classification.onrender.com
+- Health Check: https://rag-classification.onrender.com/api/v1/health
+- Fully managed by Render.com infrastructure
+- No local development server required

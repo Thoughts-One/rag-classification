@@ -30,8 +30,10 @@ env.bak/
 venv.bak/
 
 # IDE
-.vscode/
 .idea/
+.roo/
+.vscode/
+memory-bank/
 *.swp
 *.swo
 
@@ -46,3 +48,9 @@ logs/
 # Cache
 .cache
 .cache/
+cache/
+
+# System
+.DS_Store
+Thumbs.db
+

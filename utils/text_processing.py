@@ -8,12 +8,16 @@ import logging
 def preprocess_text(text: str) -> str:
     """Preprocess text for classification by:
     - Normalizing whitespace
+    - Removing HTML tags
     - Removing code blocks
     - Removing special characters
     - Trimming to reasonable length
     """
     if not text:
         return ""
+    
+    # Remove HTML tags
+    text = re.sub(r'<[^>]+>', '', text)
     
     # Remove code blocks
     text = re.sub(r'```.*?```', '', text, flags=re.DOTALL)

@@ -1,4 +1,5 @@
 import os
+import json
 import httpx
 from typing import Dict, Optional, List
 from tenacity import retry, stop_after_attempt, wait_exponential
@@ -37,7 +38,10 @@ class OpenRouterClient:
         self,
         content: str,
         role: Optional[str] = None,
-        model: Optional[str] = None
+        model: Optional[str] = None,
+        title: str = "",
+        url: str = "",
+        source: str = ""
     ) -> Dict:
         """Classify content using specified model or fallback strategy."""
         model = model or self.models["primary"]
@@ -45,7 +49,7 @@ class OpenRouterClient:
         
         for current_model in models_to_try:
             try:
-                return await self._classify_with_model(content, role, current_model)
+                return await self._classify_with_model(content, role, current_model, title, url, source)
             except Exception as e:
                 print(f"Model {current_model} failed: {str(e)}")
                 continue
@@ -56,10 +60,13 @@ class OpenRouterClient:
         self,
         content: str,
         role: Optional[str],
-        model: str
+        model: str,
+        title: str = "",
+        url: str = "",
+        source: str = ""
     ) -> Dict:
         """Perform classification with a specific model."""
-        prompt = self._build_prompt(content, role)
+        prompt = self._build_prompt(content, role, title, url, source)
         
         payload = {
             "model": model,
@@ -85,30 +92,62 @@ class OpenRouterClient:
 
     def _parse_classification_response(self, content: str, model: str) -> Dict:
         """Parse the LLM response into structured classification data."""
-        return {
-            "collection": "wordpress_block_development",
-            "topics": ["Property Display", "Block Development"],
-            "tags": ["production-ready", "dynamic-block"],
-            "confidence": 0.95,
-            "model_used": model
-        }
+        try:
+            # Remove markdown code block fences if present
+            if content.startswith("```json") and content.endswith("```"):
+                content = content[len("```json"): -len("```")].strip()
+            
+            result = json.loads(content)
+            return {
+                "section_hierarchy": result.get("section_hierarchy", []),
+                "tags": result.get("tags", []),
+                "refined_source": result.get("refined_source", ""),
+                "collection": result.get("collection", ""),
+                "topics": result.get("topics", []),
+                "confidence": result.get("confidence", 0.0),
+                "model_used": model
+            }
+        except json.JSONDecodeError:
+            return {
+                "section_hierarchy": [],
+                "tags": [],
+                "refined_source": "",
+                "collection": "",
+                "topics": [],
+                "confidence": 0.0,
+                "model_used": model
+            }
 
-    def _build_prompt(self, content: str, role: Optional[str]) -> str:
-        """Build classification prompt based on role."""
+    def _build_prompt(self, content: str, role: Optional[str], title: str = "", url: str = "", source: str = "") -> str:
+        """Build classification prompt with pre-classification requirements."""
         base_prompt = f"""
-        Classify the following technical documentation content:
-        {content}
+        You are a document classification system for technical documentation. Analyze the provided content and return:
+        1. A hierarchical section structure (e.g. ["API Reference", "Authentication"])
+        2. 3-5 relevant tags (lowercase, hyphenated)
+        3. A refined source classification (more specific than input)
+        4. Role-specific classification (based on the role parameter)
+        
+        Document Title: {title}
+        Source: {source}
+        URL: {url}
+        Content: {content[:2000] + '...' if len(content) > 2000 else content}
         """
         
         if role == "CODE":
             return base_prompt + """
-            Focus on implementation details, code quality, and production readiness.
+            Additional focus on:
+            - Implementation details
+            - Code quality
+            - Production readiness
             """
         elif role == "ARCHITECT":
             return base_prompt + """
-            Focus on system design patterns and architectural considerations.
+            Additional focus on:
+            - System design patterns
+            - Architectural considerations
+            - Integration points
             """
         else:
             return base_prompt + """
-            Provide general classification of the content.
+            Provide comprehensive classification of the content.
             """

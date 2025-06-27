@@ -91,3 +91,11 @@ This doctrine is often called **"Baby Steps Development"** or **"Micro-Increment
 - Integrated with LLMClient while avoiding circular dependencies
 - Added rule-based fallback mechanism for service degradation
 [2025-06-26 12:34:11] - Implemented RelationshipExtractor class with regex patterns for requires, integrates_with, extends, related_to, and prerequisites relationships. Integrated into DocumentClassifier workflow.
+[2025-06-26 19:14:08] - Documented Render.com deployment approach
+- Dependencies are installed automatically during Render.com build process via requirements.txt
+- Local pip install is not required or recommended
+- Service runs in isolated container environment with all dependencies pre-installed
+[2025-06-26 19:23:08] - Added production URL documentation
+- Service is available at https://rag-classification.onrender.com
+- Health check endpoint: https://rag-classification.onrender.com/api/v1/health
+- Local testing not required as service runs in Render.com environment

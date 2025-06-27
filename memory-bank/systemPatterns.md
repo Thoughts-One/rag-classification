@@ -46,3 +46,11 @@ This file describes common system patterns and architectural decisions.
 - **Evolutionary design**: Let architecture emerge through small, validated changes
 
 This doctrine is often called **"Baby Steps Development"** or **"Micro-Increment Development"** in agile contexts.
+[2025-06-26 19:15:30] - Deployment Pattern: Render.com Managed Dependencies
+- All Python dependencies are installed during Render.com build phase
+- Local development should use same requirements.txt but not require local installs
+- Production environment is fully containerized with dependencies baked in
+[2025-06-26 19:24:16] - Production Deployment Pattern
+- Service URL: https://rag-classification.onrender.com
+- Health check endpoint follows standard /api/v1/health pattern
+- Fully containerized deployment on Render.com
