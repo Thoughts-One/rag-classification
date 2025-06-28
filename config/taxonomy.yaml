@@ -40,17 +40,28 @@ collections:
       - requires-acf
       - standalone
 
-relationship_patterns:
-  requires:
-    - pattern: "requires (.+?)"
-    - pattern: "depends on (.+?)"
-    - pattern: "needs (.+?)"
-  
-  integrates_with:
-    - pattern: "works with (.+?)"
-    - pattern: "connects to (.+?)"
-    - pattern: "uses (.+?) API"
+  wordpress_documentation:
+    description: Documentation, changelogs, handbooks
+    topics:
+      - Release Notes
+      - Version History
+      - Documentation Updates
+    tags:
+      - changelog
+      - documentation
+      - handbook
 
-  extends:
-    - pattern: "extends (.+?)"
-    - pattern: "builds upon (.+?)"
+relationship_patterns:
+ requires:
+   - pattern: "requires (.+?)"
+   - pattern: "depends on (.+?)"
+   - pattern: "needs (.+?)"
+ 
+ integrates_with:
+   - pattern: "works with (.+?)"
+   - pattern: "connects to (.+?)"
+   - pattern: "uses (.+?) API"
+
+ extends:
+   - pattern: "extends (.+?)"
+   - pattern: "builds upon (.+?)"

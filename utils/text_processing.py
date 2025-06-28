@@ -16,7 +16,15 @@ def preprocess_text(text: str) -> str:
     if not text:
         return ""
     
-    # Remove HTML tags
+    # Convert HTML lists to markdown lists
+    text = re.sub(r'<ul>', '', text)
+    text = re.sub(r'</ul>', '', text)
+    text = re.sub(r'<li>(.*?)</li>', r'- \1\n', text)
+
+    # Preserve link text, remove tags
+    text = re.sub(r'<a[^>]*?>(.*?)</a>', r'\1', text)
+
+    # Remove other HTML tags
     text = re.sub(r'<[^>]+>', '', text)
     
     # Remove code blocks
